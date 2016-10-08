@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: HoloToolkit-Unity
+  productName: NotHolotoolkit
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenStyle: 0
@@ -350,7 +350,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 00f2d10c6040d301
+  metroCertificateNotAfter: 8029fe6b9540d301
   metroApplicationDescription: HoloToolkit-Unity
   wsaImages: {}
   metroTileShortName: HoloToolkit-Unity
