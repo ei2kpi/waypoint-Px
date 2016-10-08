@@ -26,6 +26,10 @@ public class FlowManager : MonoBehaviour {
         {
             // Get out of SetupMode
             GameObject.Find("Managers").GetComponent<CursorSetupManager>().SetupMode = false;
+            //Disable SR Visualization
+            MeshRenderer[] SRMeshRends = GameObject.Find("SpatialMapping").GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer mr in SRMeshRends)
+                mr.enabled = false;
             // Get and Initialize all waypoints
             GetAllWaypoints();
         }
@@ -33,11 +37,9 @@ public class FlowManager : MonoBehaviour {
         {
             if (wayPointList.Count != 0)
             {
-                distToWaypoint = Vector3.Distance(Camera.main.transform.position, CurrentWayPoint.position);
+                CheckIfEnteredWayPoint();
             }
         }
-
-        CheckIfEnteredWayPoint();
 
         // Check if GoToNextWayPoint was pressed
         if (GoToNextWayPointBtn)
@@ -49,6 +51,8 @@ public class FlowManager : MonoBehaviour {
 
     private void CheckIfEnteredWayPoint()
     {
+        distToWaypoint = Vector3.Distance(Camera.main.transform.position, CurrentWayPoint.position);
+
         if (distToWaypoint <= waypointThreshold)
         {
             ReachedCurrentWayPoint = true;
