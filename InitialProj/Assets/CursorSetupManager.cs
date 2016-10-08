@@ -10,15 +10,24 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
     void Start () {
         if (SetupMode)
         {
-            GameObject cursorWaypoint = Instantiate(Waypoint);
-            GestureManager.Instance.OverrideFocusedObject = cursorWaypoint;
+            GestureManager.Instance.OverrideFocusedObject = Waypoint;
         }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = Vector3.Lerp(transform.position, ProposeTransformPosition(), 0.2f);
+        if (SetupMode)
+        {
+            Waypoint.transform.position = Vector3.Lerp(Waypoint.transform.position, ProposeTransformPosition(), 0.2f);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Instantiate(Waypoint, Waypoint.transform.position, Quaternion.identity);
+            }
+        }
     }
+
+
 
     Vector3 ProposeTransformPosition()
     {
@@ -26,10 +35,5 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
         Vector3 retval = Camera.main.transform.position + Camera.main.transform.forward * 2;
 
         return retval;
-    }
-
-    public void OnSelect()
-    {
-        Instantiate(Waypoint, Camera.main.transform.position, Quaternion.identity);
     }
 }
