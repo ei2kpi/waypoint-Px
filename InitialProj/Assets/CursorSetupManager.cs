@@ -5,12 +5,15 @@ using System.Collections;
 public class CursorSetupManager : Singleton<CursorSetupManager> {
     public GameObject Waypoint;
     public bool SetupMode = true;
+    private GameObject cursorWayPoint;
 
     // Use this for initialization
     void Start () {
         if (SetupMode)
         {
-            GestureManager.Instance.OverrideFocusedObject = Waypoint;
+            cursorWayPoint = (GameObject)Instantiate(Waypoint, ProposeTransformPosition(), Quaternion.identity);
+            cursorWayPoint.transform.SetParent(GameObject.Find("Waypoints").transform);
+            GestureManager.Instance.OverrideFocusedObject = cursorWayPoint;
         }
 	}
 	
@@ -18,13 +21,18 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
 	void Update () {
         if (SetupMode)
         {
-            Waypoint.transform.position = Vector3.Lerp(Waypoint.transform.position, ProposeTransformPosition(), 0.2f);
+            cursorWayPoint.transform.position = Vector3.Lerp(cursorWayPoint.transform.position, ProposeTransformPosition(), 0.2f);
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                GameObject newWaypoint = (GameObject)Instantiate(Waypoint, Waypoint.transform.position, Quaternion.identity);
+                GameObject newWaypoint = (GameObject)Instantiate(Waypoint, cursorWayPoint.transform.position, Quaternion.identity);
+                newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
                 WorldAnchorManager.Instance.AttachAnchor(newWaypoint, newWaypoint.GetInstanceID().ToString());
             }
+        }
+        else
+        {
+            DestroyObject(cursorWayPoint);
         }
     }
 
@@ -32,7 +40,6 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
 
     Vector3 ProposeTransformPosition()
     {
-        // Put the model 2m in front of the user.
         Vector3 retval = GameObject.Find("CursorWithFeedback").transform.position;
 
         return retval;
