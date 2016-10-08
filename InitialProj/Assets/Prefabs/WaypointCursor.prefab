@@ -22,8 +22,8 @@ GameObject:
   - 114: {fileID: 114000010166095068}
   - 114: {fileID: 114000010191832922}
   m_Layer: 2
-  m_Name: Waypoint
-  m_TagString: Waypoint
+  m_Name: WaypointCursor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

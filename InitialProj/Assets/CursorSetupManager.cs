@@ -5,7 +5,7 @@ using UnityEngine.VR.WSA.Persistence;
 
 public class CursorSetupManager : Singleton<CursorSetupManager> {
     public GameObject Waypoint;
-    public bool SetupMode = true;
+    public bool SetupMode = false;
     private GameObject cursorWayPoint;
 
     // Use this for initialization
@@ -36,8 +36,13 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
 				for (int index = 0; index < ids.Length; index++)
 				{
 					GameObject newWaypoint = (GameObject)Instantiate(Waypoint, Waypoint.transform.position, Quaternion.identity);
-					store.Load(ids[index], newWaypoint);
+                    newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
+                    store.Load(ids[index], newWaypoint);
 				}
+                //if(GameObject.Find("Waypoints").transform.childCount > 0)
+                //{
+                //    SetupMode = false;
+                //}
 			}
 			else if (Input.GetKeyDown(KeyCode.C))
 			{
