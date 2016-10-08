@@ -350,7 +350,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 0038ab069740d301
+  metroCertificateNotAfter: 00f2d10c6040d301
   metroApplicationDescription: HoloToolkit-Unity
   wsaImages: {}
   metroTileShortName: HoloToolkit-Unity
