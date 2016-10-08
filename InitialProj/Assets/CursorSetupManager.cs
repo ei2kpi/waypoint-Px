@@ -12,7 +12,6 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
         if (SetupMode)
         {
             cursorWayPoint = (GameObject)Instantiate(Waypoint, ProposeTransformPosition(), Quaternion.identity);
-            cursorWayPoint.transform.SetParent(GameObject.Find("Waypoints").transform);
             GestureManager.Instance.OverrideFocusedObject = cursorWayPoint;
         }
 	}

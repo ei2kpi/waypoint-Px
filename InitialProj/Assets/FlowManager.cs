@@ -24,6 +24,8 @@ public class FlowManager : MonoBehaviour {
     {
         if (StartFlow)
         {
+            // Get out of SetupMode
+            GameObject.Find("Managers").GetComponent<CursorSetupManager>().SetupMode = false;
             // Get and Initialize all waypoints
             GetAllWaypoints();
         }
@@ -48,9 +50,15 @@ public class FlowManager : MonoBehaviour {
     private void CheckIfEnteredWayPoint()
     {
         if (distToWaypoint <= waypointThreshold)
+        {
             ReachedCurrentWayPoint = true;
+            CurrentWayPoint.GetComponent<FlowManagerProps>().ReachedCurrentWayPoint = true;
+        }
         else
+        {
             ReachedCurrentWayPoint = false;
+            CurrentWayPoint.GetComponent<FlowManagerProps>().ReachedCurrentWayPoint = false;
+        }
     }
 
     private void GetAllWaypoints()
