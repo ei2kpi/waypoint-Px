@@ -32,7 +32,7 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
     Vector3 ProposeTransformPosition()
     {
         // Put the model 2m in front of the user.
-        Vector3 retval = Camera.main.transform.position + Camera.main.transform.forward * 2;
+        Vector3 retval = GameObject.Find("CursorWithFeedback").transform.position;
 
         return retval;
     }
