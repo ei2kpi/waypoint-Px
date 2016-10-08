@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692522, g: 0.496787, b: 0.5750854, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 229350269}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -338,45 +338,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e65869270905f354d95932dc9f21d578, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &400143094 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4000010703163086, guid: 279b534ea3a46b244914a9e0d40e8a4d,
-    type: 2}
-  m_PrefabInternal: {fileID: 733725632}
---- !u!1 &485613040 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 190680, guid: b84b73491ac53a34095000876132a211, type: 2}
-  m_PrefabInternal: {fileID: 1266818518}
---- !u!114 &485613041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 485613040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120ba207cff42584584563bcf18c124f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExtraMouseSensitivityScale: 3
-  DefaultMouseSensitivity: 0.1
-  MouseLookButton: 1
-  IsControllerLookInverted: 1
-  CurrentControlMode: 0
-  FastControlKey: 305
-  ControlSlowSpeed: 0.1
-  ControlFastSpeed: 1
-  MoveHorizontal: Horizontal
-  MoveVertical: Vertical
-  MouseX: Mouse X
-  MouseY: Mouse Y
-  LookHorizontal: LookHorizontal
-  LookVertical: LookVertical
---- !u!4 &485613046 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 402774, guid: b84b73491ac53a34095000876132a211, type: 2}
-  m_PrefabInternal: {fileID: 1266818518}
---- !u!1001 &733725632
+--- !u!1001 &398010484
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -415,18 +377,52 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010160213872, guid: 279b534ea3a46b244914a9e0d40e8a4d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
+    - target: {fileID: 114000013723939218, guid: 279b534ea3a46b244914a9e0d40e8a4d,
+        type: 2}
+      propertyPath: waypointThreshold
+      value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010160213872, guid: 279b534ea3a46b244914a9e0d40e8a4d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114000010715101194, guid: 279b534ea3a46b244914a9e0d40e8a4d, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 279b534ea3a46b244914a9e0d40e8a4d, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &400143094 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000010703163086, guid: 279b534ea3a46b244914a9e0d40e8a4d,
+    type: 2}
+  m_PrefabInternal: {fileID: 398010484}
+--- !u!1 &485613040 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 190680, guid: b84b73491ac53a34095000876132a211, type: 2}
+  m_PrefabInternal: {fileID: 1266818518}
+--- !u!114 &485613041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 485613040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120ba207cff42584584563bcf18c124f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExtraMouseSensitivityScale: 3
+  DefaultMouseSensitivity: 0.1
+  MouseLookButton: 1
+  IsControllerLookInverted: 1
+  CurrentControlMode: 0
+  FastControlKey: 305
+  ControlSlowSpeed: 0.1
+  ControlFastSpeed: 1
+  MoveHorizontal: Horizontal
+  MoveVertical: Vertical
+  MouseX: Mouse X
+  MouseY: Mouse Y
+  LookHorizontal: LookHorizontal
+  LookVertical: LookVertical
+--- !u!4 &485613046 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 402774, guid: b84b73491ac53a34095000876132a211, type: 2}
+  m_PrefabInternal: {fileID: 1266818518}
 --- !u!1 &1094306159
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42234a6e9724170448a98e73a2e02b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waypoint: {fileID: 2045913466}
+  Waypoint: {fileID: 1000011107313634, guid: 0d6711c6a7f048b47a31b90ff8b61833, type: 2}
   SetupMode: 1
 --- !u!1 &1561465450
 GameObject:
@@ -818,8 +814,3 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90749889d87976143a9e21072d2434b4, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2045913466 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000013810458954, guid: 279b534ea3a46b244914a9e0d40e8a4d,
-    type: 2}
-  m_PrefabInternal: {fileID: 733725632}

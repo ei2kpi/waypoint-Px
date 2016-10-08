@@ -22,7 +22,7 @@ GameObject:
   - 33: {fileID: 33000013662929400}
   - 65: {fileID: 65000012358653788}
   - 23: {fileID: 23000010834906996}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010295389366}
   - 114: {fileID: 114000010166095068}
-  m_Layer: 0
+  - 114: {fileID: 114000010191832922}
+  m_Layer: 2
   m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011107313634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.13634507, y: -0.101801164, z: 1.8836578}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010084321036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.103, y: 0, z: 0.991}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -131,3 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750bc7e8aa1658a4bbacda5a1b4d660a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000010191832922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011107313634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5b41fecca48714ca9a4320a8839b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsCurrentWayPoint: 0
