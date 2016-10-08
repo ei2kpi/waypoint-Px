@@ -22,7 +22,8 @@ public class CursorSetupManager : Singleton<CursorSetupManager> {
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Instantiate(Waypoint, Waypoint.transform.position, Quaternion.identity);
+                GameObject newWaypoint = (GameObject)Instantiate(Waypoint, Waypoint.transform.position, Quaternion.identity);
+                WorldAnchorManager.Instance.AttachAnchor(newWaypoint, newWaypoint.GetInstanceID().ToString());
             }
         }
     }
