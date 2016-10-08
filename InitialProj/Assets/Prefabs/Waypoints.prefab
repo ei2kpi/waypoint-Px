@@ -51,11 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6594d6b94be96214a90ef227e2bb0738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartFlow: 0
   wayPointList: []
-  waypointThreshold: 1
+  waypointThreshold: 1.5
   distToWaypoint: 0
   CurrentWayPoint: {fileID: 0}
   GoToNextWayPointBtn: 0
   WrapWayPoints: 0
   ReachedCurrentWayPoint: 0
+  WaypointPrefab: {fileID: 1000011107313634, guid: 0d6711c6a7f048b47a31b90ff8b61833,
+    type: 2}
+  WaypointCursorPrefab: {fileID: 1000011107313634, guid: b3eb8f6f21efd6b4b8c9a883e5f01cdc,
+    type: 2}
+  SetupMode: 1
