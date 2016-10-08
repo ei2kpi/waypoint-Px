@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 114000011104734474}
   - 114: {fileID: 114000013878204848}
   - 114: {fileID: 114000014158132110}
+  - 114: {fileID: 114000011422118662}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -80,6 +81,17 @@ MonoBehaviour:
   DirectionStrength: 0.83
   StabilityAverageDistanceWeight: 2
   StabilityVarianceWeight: 1
+--- !u!114 &114000011422118662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013488365534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f122ca4ae6b527e4798205becf9a0550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013878204848
 MonoBehaviour:
   m_ObjectHideFlags: 1
