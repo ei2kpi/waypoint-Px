@@ -19,8 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010703163086}
-  - 114: {fileID: 114000010715101194}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +34,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013658363246}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +52,7 @@ GameObject:
   - 33: {fileID: 33000010501895604}
   - 65: {fileID: 65000010359621044}
   - 23: {fileID: 23000011328022058}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014144465176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.103, y: 0, z: 0.991}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -149,15 +148,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000010715101194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012666843614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0478f4d344226394284df5dd14e68b6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Waypoint: {fileID: 1000011107313634, guid: 0d6711c6a7f048b47a31b90ff8b61833, type: 2}
