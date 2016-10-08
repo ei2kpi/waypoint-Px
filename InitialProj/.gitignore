@@ -2,31 +2,40 @@
 # Unity generated #
 # =============== #
 Temp/
+Obj/
+Bin/
+Builds/
+UnityGenerated/
 Library/
-WSA/
+Assets/AssetStoreTools*
+App/
+UWP/
+project.json
+project.lock.json
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
+.vs/
 ExportedObj/
 obj/
 *.svd
 *.userprefs
 /*.csproj
+*.csproj
 *.pidb
 *.suo
 /*.sln
+*.sln
 *.user
 *.unityproj
-*.booproj
-
-# ============ #
-# OS generated #
-# ============ #
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+*.ipch
+*.opensdf
+*.sdf
+*.obj
+*.tlog
+*.log
+*.idb
+*.opendb
+WSATestCertificate.pfx
+WSATestCertificate.pfx.meta
