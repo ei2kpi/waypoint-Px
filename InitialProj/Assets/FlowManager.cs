@@ -1,12 +1,27 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.VR.WSA.Persistence;
 using HoloToolkit.Unity;
 
-public class FlowManager : MonoBehaviour {
-    
-    public List<Transform> wayPointList;
+
+[Serializable()]
+public class DrugData
+{
+	public string name;
+	public int dosage;
+
+}
+
+public class FlowManager : MonoBehaviour
+{ 
+	public DrugData[] drugs = new DrugData[10];
+
+	// this index will track which waypoint we are placing and assign the matching drugData
+	private int waypointIndex = 0;
+
+	public List<Transform> wayPointList;
 
     public float waypointThreshold;
     public float distToWaypoint;
@@ -20,6 +35,8 @@ public class FlowManager : MonoBehaviour {
     public GameObject WaypointPrefab;
     public GameObject WaypointCursorPrefab;
     public bool SetupMode = false;
+
+	
 
     void Start () {
 	
@@ -52,8 +69,10 @@ public class FlowManager : MonoBehaviour {
     {
         ClearAllWaypoints();
 
-        // Create Waypoint on cursor
-        cursorWayPoint = (GameObject)Instantiate(WaypointCursorPrefab, ProposeTransformPosition(), Quaternion.identity);
+		waypointIndex = 0;
+
+		// Create Waypoint on cursor
+		cursorWayPoint = (GameObject)Instantiate(WaypointCursorPrefab, ProposeTransformPosition(), Quaternion.identity);
         GestureManager.Instance.OverrideFocusedObject = cursorWayPoint;
         
         //Enable SR Visualization
@@ -169,7 +188,16 @@ public class FlowManager : MonoBehaviour {
             GameObject newWaypoint = (GameObject)Instantiate(WaypointPrefab, cursorWayPoint.transform.position, Quaternion.identity);
             newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
             WorldAnchorManager.Instance.AttachAnchor(newWaypoint, newWaypoint.GetInstanceID().ToString());
-        }
+
+			// add the drugData to the placed waypoint
+			FlowManagerProps props = gameObject.GetComponent(typeof(FlowManagerProps)) as FlowManagerProps;
+
+			if (props != null)
+			{
+				props.drugData = drugs[waypointIndex];
+				waypointIndex++;
+			}
+		}
         else if (Input.GetKeyDown(KeyCode.L))
         {
             WorldAnchorStore store = WorldAnchorManager.Instance.AnchorStore;
