@@ -406,6 +406,18 @@ Prefab:
       propertyPath: drugs.Array.data[1].dosage
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013723939218, guid: 279b534ea3a46b244914a9e0d40e8a4d,
+        type: 2}
+      propertyPath: drugs.Array.data[0].productCard
+      value: 
+      objectReference: {fileID: 1000013888095986, guid: c06fe53839f034f7b98102ec74a87a59,
+        type: 2}
+    - target: {fileID: 114000013723939218, guid: 279b534ea3a46b244914a9e0d40e8a4d,
+        type: 2}
+      propertyPath: drugs.Array.data[1].productCard
+      value: 
+      objectReference: {fileID: 1000013888095986, guid: c06fe53839f034f7b98102ec74a87a59,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 279b534ea3a46b244914a9e0d40e8a4d, type: 2}
   m_IsPrefabParent: 0
