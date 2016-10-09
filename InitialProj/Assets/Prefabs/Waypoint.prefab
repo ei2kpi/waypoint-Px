@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011888847860
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,8 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5b41fecca48714ca9a4320a8839b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsCurrentWayPoint: 0
   ReachedCurrentWayPoint: 0
+  CurrWayPointState: 0
 --- !u!114 &114000011414596170
 MonoBehaviour:
   m_ObjectHideFlags: 1

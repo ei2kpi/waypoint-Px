@@ -81,8 +81,6 @@ public class FlowManager : MonoBehaviour
             if (cursorWayPoint != null)
                 cursorWayPoint.transform.position = Vector3.Lerp(cursorWayPoint.transform.position, ProposeTransformPosition(), 0.2f);
         }
-
-
     }
 
     private void CheckIfUserIsNearWaypoint()
