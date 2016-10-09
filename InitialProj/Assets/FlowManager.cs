@@ -60,7 +60,7 @@ public class FlowManager : MonoBehaviour
         // Regular Update Loop
         if (wayPointList.Count != 0)
         {
-            CheckIfReachedWayPoint();
+            // CheckIfReachedWayPoint();
         }
 
     }
@@ -144,7 +144,7 @@ public class FlowManager : MonoBehaviour
             Debug.logger.Log("Clearing all waypoints");
         }
     }
-    private void GoToNextWayPoint()
+    public void GoToNextWayPoint()
     {
         if (CurrentWayPoint != null)
         {
