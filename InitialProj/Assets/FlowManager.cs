@@ -93,6 +93,7 @@ public class FlowManager : MonoBehaviour
         foreach (MeshRenderer mr in SRMeshRends)
             mr.enabled = false;
 
+        GameObject.Find("Agent").transform.position = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
         SetupMode = false;
     }
 
