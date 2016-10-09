@@ -125,6 +125,9 @@ public class FlowManager : MonoBehaviour
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Waypoint"))
         {
             wayPointList.Add(obj.transform);
+            obj.layer = 0;
+            foreach (Transform trans in obj.transform)
+                trans.gameObject.layer = 0;
         }
         CurrentWayPoint = wayPointList[0];
         CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = true;
