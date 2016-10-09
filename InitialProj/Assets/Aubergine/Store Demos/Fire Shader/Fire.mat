@@ -22,6 +22,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _AltTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 03f6a1e204f432f469de754734ee4aa5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DefTex
+      second:
+        m_Texture: {fileID: 2800000, guid: e6df0219aabea15448a69dfb1a570060, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _FireTex
       second:
         m_Texture: {fileID: 2800000, guid: e6df0219aabea15448a69dfb1a570060, type: 3}

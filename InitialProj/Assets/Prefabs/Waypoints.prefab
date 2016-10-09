@@ -51,15 +51,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6594d6b94be96214a90ef227e2bb0738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentAppState: 0
   drugs:
-  - name: OxyContin
+  - name: Adderall
     productCard: {fileID: 1000012963281772, guid: a55bc4077bbd0bd4197f94b2f83567b3,
       type: 2}
-  - name: Amoxicillin
-    productCard: {fileID: 1000012963281772, guid: a55bc4077bbd0bd4197f94b2f83567b3,
+  - name: Anacin
+    productCard: {fileID: 1000012963281772, guid: 53930124bdf76154bb0378e05cce91d8,
       type: 2}
-  - name: 
-    productCard: {fileID: 0}
+  - name: Aricept
+    productCard: {fileID: 1000012963281772, guid: c43adad02e2bec7489b77e38f4484506,
+      type: 2}
   - name: 
     productCard: {fileID: 0}
   - name: 
@@ -75,8 +77,9 @@ MonoBehaviour:
   - name: 
     productCard: {fileID: 0}
   wayPointList: []
-  waypointThreshold: 1.5
+  waypointThreshold: 2
   distToWaypoint: 0
+  PrevWayPoint: {fileID: 0}
   CurrentWayPoint: {fileID: 0}
   GoToNextWayPointBtn: 0
   WrapWayPoints: 0
@@ -85,4 +88,3 @@ MonoBehaviour:
     type: 2}
   WaypointCursorPrefab: {fileID: 1000011107313634, guid: b3eb8f6f21efd6b4b8c9a883e5f01cdc,
     type: 2}
-  SetupMode: 1

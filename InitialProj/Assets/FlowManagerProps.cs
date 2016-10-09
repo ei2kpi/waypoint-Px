@@ -17,7 +17,7 @@ public class FlowManagerProps : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         pill_count = 2;
-        pill_name = "viagra";
+        //pill_name = "viagra";
 
         meshR = gameObject.GetComponentsInChildren<MeshRenderer>();
         meshText = gameObject.GetComponentInChildren<TextMesh>();
@@ -41,15 +41,15 @@ public class FlowManagerProps : MonoBehaviour {
             {
                 case (0):
                     pill_count = 3;
-                    pill_name = "Adderall";
+                    //pill_name = "Adderall";
                     break;
                 case (1):
                     pill_count = 2;
-                    pill_name = "Anacin";
+                    //pill_name = "Anacin";
                     break;
                 case (2):
                     pill_count = 5;
-                    pill_name = "Aricept";
+                    //pill_name = "Aricept";
                     break;
                 default:
                     break;
@@ -64,7 +64,7 @@ public class FlowManagerProps : MonoBehaviour {
                     }
                     break;
                 case (FlowManager.WaypointState.GoToWaypoint):
-                    meshText.text = string.Format("Collect {0} {1}", pill_count, pill_name);
+                    meshText.text = string.Format("Collect {0}", pill_count);
                     foreach (MeshRenderer mr in meshR)
                     {
                         mr.enabled = true;
@@ -75,7 +75,7 @@ public class FlowManagerProps : MonoBehaviour {
                     meshText.text = "Move on to the next Rx";
                     break;
                 case (FlowManager.WaypointState.CloseToWaypoint):
-                    meshText.text = string.Format("Tap when complete. Collect {0} {1}", pill_count, pill_name);
+                    meshText.text = string.Format("Tap when complete. Collect {0}", pill_count);
                     break;
                 default:
                     break;
