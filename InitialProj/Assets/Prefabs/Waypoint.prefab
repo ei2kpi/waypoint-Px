@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014285902738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1272, z: 0}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 0.125, y: 0.09375, z: 0.125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -246,6 +246,8 @@ MonoBehaviour:
   ReachedCurrentWayPoint: 0
   fire: {fileID: 2800000, guid: e6df0219aabea15448a69dfb1a570060, type: 3}
   blue: {fileID: 2800000, guid: 03f6a1e204f432f469de754734ee4aa5, type: 3}
+  pill_count: 0
+  pill_name: 
   CurrWayPointState: 0
 --- !u!114 &114000011414596170
 MonoBehaviour:

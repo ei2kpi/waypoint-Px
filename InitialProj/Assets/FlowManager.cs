@@ -11,7 +11,6 @@ public class DrugData
 {
 	public string name;
 	public GameObject productCard;
-
 }
 
 public class FlowManager : MonoBehaviour
@@ -40,7 +39,7 @@ public class FlowManager : MonoBehaviour
 	
 	}
 	
-    private void AppStateChanged()
+    public void AppStateChanged()
     {
         // Idle, WayPointSetup, Intro, Collection, Finish
         switch (CurrentAppState)
@@ -147,8 +146,11 @@ public class FlowManager : MonoBehaviour
         SetOutro(false);
         ClearAllWaypoints();
 
-		// Create Waypoint on cursor
-		cursorWayPoint = (GameObject)Instantiate(WaypointCursorPrefab, ProposeTransformPosition(), Quaternion.identity);
+        //Turn On table renderer
+        GameObject.Find("TableObstacle").GetComponent<MeshRenderer>().enabled = true;
+
+        // Create Waypoint on cursor
+        cursorWayPoint = (GameObject)Instantiate(WaypointCursorPrefab, ProposeTransformPosition(), Quaternion.identity);
         GestureManager.Instance.OverrideFocusedObject = cursorWayPoint;
         
         //Enable SR Visualization
@@ -163,6 +165,13 @@ public class FlowManager : MonoBehaviour
     {
         SetIntro(true);
         SetOutro(false);
+        // Disable Table Renderer
+        GameObject.Find("TableObstacle").GetComponent<MeshRenderer>().enabled = false;
+
+        // Reset normal cursor instead of waypoint
+        if (cursorWayPoint != null)
+            DestroyObject(cursorWayPoint);
+        GestureManager.Instance.OverrideFocusedObject = GameObject.Find("IntroParent");
     }
 
     private void GetAllWaypoints()
@@ -170,6 +179,7 @@ public class FlowManager : MonoBehaviour
         wayPointList.Clear();
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Waypoint"))
         {
+            obj.GetComponent<FlowManagerProps>().CurrWayPointState = WaypointState.Invisible;
             wayPointList.Add(obj.transform);
             obj.layer = 0;
             foreach (Transform trans in obj.transform)
@@ -185,7 +195,7 @@ public class FlowManager : MonoBehaviour
 		}
 	}
 
-    private void ClearAllWaypoints()
+    private void ClearAllWaypoints(bool clearStore = false)
     {
         if (wayPointList.Count != 0)
         {
@@ -193,16 +203,24 @@ public class FlowManager : MonoBehaviour
             {
                 DestroyObject(obj);
             }
+
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ProductCard"))
+            {
+                DestroyObject(obj);
+            }
             wayPointList.Clear();
             CurrentWayPoint = null;
             PrevWayPoint = null;
-            Debug.logger.Log("Clearing all waypoints");
+            Debug.logger.Log("Clearing all waypoints and PRoduct Cards");
         }
 
-        // Clear Anchor Store completely
-        WorldAnchorStore store = WorldAnchorManager.Instance.AnchorStore;
-        if(store != null)
-            store.Clear();
+        if (clearStore)
+        {
+            // Clear Anchor Store completely
+            WorldAnchorStore store = WorldAnchorManager.Instance.AnchorStore;
+            if (store != null)
+                store.Clear();
+        }
     }
 
     public void GoToNextWayPoint()
@@ -221,6 +239,11 @@ public class FlowManager : MonoBehaviour
                 CurrentWayPoint = wayPointList[nextWaypointIndex];
             else if (WrapWayPoints)
                 CurrentWayPoint = wayPointList[0];
+            else
+            {
+                CurrentAppState = AppState.Finish;
+                AppStateChanged();
+            }
 
             CurrentWayPoint.GetComponent<FlowManagerProps>().CurrWayPointState = WaypointState.GoToWaypoint;
 			
@@ -297,7 +320,30 @@ public class FlowManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            ClearAllWaypoints();
+            ClearAllWaypoints(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.V))
+        {
+            ClearAllWaypoints(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            // Load Table
+            WorldAnchorStore store = WorldAnchorManager.Instance.AnchorStore;
+            if (store != null)
+            {
+                string[] ids = store.GetAllIds();
+                for (int index = 0; index < ids.Length; index++)
+                {
+                    store.Load("Table", GameObject.Find("TableObstacle"));
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            WorldAnchorManager.Instance.AttachAnchor(GameObject.Find("TableObstacle"), "Table");
         }
     }
 

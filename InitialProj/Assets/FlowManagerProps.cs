@@ -61,6 +61,7 @@ public class FlowManagerProps : MonoBehaviour {
                     foreach (MeshRenderer mr in meshR)
                     {
                         mr.enabled = false;
+                        meshBottleR.material.SetTexture("_FireTex", fire);
                     }
                     break;
                 case (FlowManager.WaypointState.GoToWaypoint):
@@ -68,6 +69,7 @@ public class FlowManagerProps : MonoBehaviour {
                     foreach (MeshRenderer mr in meshR)
                     {
                         mr.enabled = true;
+                        meshBottleR.material.SetTexture("_FireTex", fire);
                     }
                     break;
                 case (FlowManager.WaypointState.FinishedWithWaypoint):
@@ -75,6 +77,7 @@ public class FlowManagerProps : MonoBehaviour {
                     meshText.text = "Move on to the next Rx";
                     break;
                 case (FlowManager.WaypointState.CloseToWaypoint):
+                    meshBottleR.material.SetTexture("_FireTex", fire);
                     meshText.text = string.Format("Tap when complete. Collect {0}", pill_count);
                     break;
                 default:
