@@ -15,8 +15,10 @@ public class DrugData
 }
 
 public class FlowManager : MonoBehaviour
-{ 
-	public DrugData[] drugs = new DrugData[10];
+{
+    public AppState CurrentAppState = AppState.Idle;
+
+    public DrugData[] drugs = new DrugData[10];
 
 	public List<Transform> wayPointList;
 
@@ -32,38 +34,76 @@ public class FlowManager : MonoBehaviour
     public GameObject WaypointPrefab;
     public GameObject WaypointCursorPrefab;
 	private GameObject productCard;
-	public bool SetupMode = false;
-
-    public AppState CurrentAppState = AppState.Idle;
     
     void Start () {
 	
 	}
 	
-	// Update is called once per frame
-	void Update ()
+    private void AppStateChanged()
+    {
+        // Idle, WayPointSetup, Intro, Collection, Finish
+        switch (CurrentAppState)
+        {
+            case AppState.Idle:
+                // Reset State of the app to Idle
+                break;
+            case AppState.WaypointSetup:
+                // Go to Waypoint Setup State
+                SwitchToWayPointSetup();
+                break;
+            case AppState.Intro:
+                // Go To Intro Mode
+                SwitchToIntro();
+                break;
+            case AppState.Collection:
+                // User starts collecting Pills
+                SwitchToCollectionMode();
+                break;
+            case AppState.Finish:
+                // User finishes collection all pills
+                SwitchToFinishMode();
+                break;
+        }
+    }
+
+    void Update()
     {
         CheckForKeybdInput();
 
-        if (SetupMode)
+        if (CurrentAppState == AppState.WaypointSetup)
         {
-            CheckForSetupKeybdInput();
             if (cursorWayPoint != null)
             {
-                // Update Waypoint position to Cursor position
+                // Constantly update Waypoint position to Cursor position to attach Waypoint to Cursor
                 cursorWayPoint.transform.position = Vector3.Lerp(cursorWayPoint.transform.position, ProposeTransformPosition(), 0.2f);
             }
         }
-
-        // Regular Update Loop
-        if (wayPointList.Count != 0)
-        {
-            // CheckIfReachedWayPoint();
-        }
-
     }
 
-    private void EnterSetupMode()
+    private void SwitchToFinishMode()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void SwitchToCollectionMode()
+    {
+        // Reset normal cursor instead of waypoint
+        if (cursorWayPoint != null)
+            DestroyObject(cursorWayPoint);
+
+        // Now that cursor waypoint is destroyed, Get all the others!
+        GetAllWaypoints();
+
+        //Disable SR Visualization
+        MeshRenderer[] SRMeshRends = GameObject.Find("SpatialMapping").GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer mr in SRMeshRends)
+            mr.enabled = false;
+
+        GameObject.Find("Agent").transform.position = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
+        CurrentAppState = AppState.Intro;
+    }
+
+    private void SwitchToWayPointSetup()
     {
         ClearAllWaypoints();
 
@@ -76,25 +116,11 @@ public class FlowManager : MonoBehaviour
         foreach (MeshRenderer mr in SRMeshRends)
             mr.enabled = true;
 
-        SetupMode = true;
+        CurrentAppState = AppState.WaypointSetup;
     }
 
-    private void ExitSetupMode()
+    private void SwitchToIntro()
     {
-        // Reset normal cursor instead of waypoint
-        if (cursorWayPoint != null)
-            DestroyObject(cursorWayPoint);
-
-        // Now that cursor waypoint is destroyed, Get all the others!
-        GetAllWaypoints();
-        
-        //Disable SR Visualization
-        MeshRenderer[] SRMeshRends = GameObject.Find("SpatialMapping").GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer mr in SRMeshRends)
-            mr.enabled = false;
-
-        GameObject.Find("Agent").transform.position = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
-        SetupMode = false;
     }
 
     private void CheckIfReachedWayPoint()
@@ -134,7 +160,6 @@ public class FlowManager : MonoBehaviour
 		{
 			productCard = (GameObject)Instantiate(drugs[0].productCard, CurrentWayPoint.transform.position, Quaternion.identity);
 		}
-
 	}
 
     private void ClearAllWaypoints()
@@ -149,6 +174,11 @@ public class FlowManager : MonoBehaviour
             CurrentWayPoint = null;
             Debug.logger.Log("Clearing all waypoints");
         }
+
+        // Clear Anchor Store completely
+        WorldAnchorStore store = WorldAnchorManager.Instance.AnchorStore;
+        if(store != null)
+            store.Clear();
     }
     public void GoToNextWayPoint()
     {
@@ -158,6 +188,7 @@ public class FlowManager : MonoBehaviour
             CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = false;
 
 			int nextWaypointIndex = wayPointList.IndexOf(CurrentWayPoint) + 1;
+
 			// Switch to next waypoint, if WrapMode is on, then wrap back to 0
 			if (wayPointList.IndexOf(CurrentWayPoint) < wayPointList.Count - 1)
                 CurrentWayPoint = wayPointList[nextWaypointIndex];
@@ -177,61 +208,69 @@ public class FlowManager : MonoBehaviour
 
     private void  CheckForKeybdInput()
     {
-        // Check if GoToNextWayPoint was pressed or user presses A
-        if (GoToNextWayPointBtn || Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            GoToNextWayPoint();
-            GoToNextWayPointBtn = false;
+            CurrentAppState = AppState.WaypointSetup;
+            AppStateChanged();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            EnterSetupMode();
-        }
-    }
-
-    private void CheckForSetupKeybdInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ExitSetupMode();
+            CurrentAppState = AppState.Intro;
+            AppStateChanged();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            CurrentAppState = AppState.Collection;
+            AppStateChanged();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            CurrentAppState = AppState.Finish;
+            AppStateChanged();
+        }
+
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            CurrentAppState = AppState.Idle;
+            AppStateChanged();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && CurrentAppState == AppState.WaypointSetup)
+        {
+            // Drop a WayPoint
             GameObject newWaypoint = (GameObject)Instantiate(WaypointPrefab, cursorWayPoint.transform.position, Quaternion.identity);
             newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
             WorldAnchorManager.Instance.AttachAnchor(newWaypoint, newWaypoint.GetInstanceID().ToString());
-		}
+        }
+
+        if ((GoToNextWayPointBtn || Input.GetKeyDown(KeyCode.Space)) && CurrentAppState == AppState.Collection)
+        {
+            // Move to Next Waypoint
+            GoToNextWayPoint();
+            GoToNextWayPointBtn = false;
+        }
+        
         else if (Input.GetKeyDown(KeyCode.L))
         {
+            // Load All Waypoints
             WorldAnchorStore store = WorldAnchorManager.Instance.AnchorStore;
-            string[] ids = store.GetAllIds();
-            for (int index = 0; index < ids.Length; index++)
+            if (store != null)
             {
-                GameObject newWaypoint = (GameObject)Instantiate(WaypointPrefab, WaypointPrefab.transform.position, Quaternion.identity);
-                newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
-                store.Load(ids[index], newWaypoint);
+                string[] ids = store.GetAllIds();
+                for (int index = 0; index < ids.Length; index++)
+                {
+                    GameObject newWaypoint = (GameObject)Instantiate(WaypointPrefab, WaypointPrefab.transform.position, Quaternion.identity);
+                    newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
+                    store.Load(ids[index], newWaypoint);
+                }
             }
-            //if(GameObject.Find("Waypoints").transform.childCount > 0)
-            //{
-            //    SetupMode = false;
-            //}
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-
-            for (int index = 0; index < waypoints.Length; index++)
-            {
-                if (waypoints[index] != WaypointPrefab)
-                {
-                    Destroy(waypoints[index]);
-                }
-            }
-
-            WorldAnchorStore store = WorldAnchorManager.Instance.AnchorStore;
-            store.Clear();
+            ClearAllWaypoints();
         }
     }
 
@@ -252,7 +291,6 @@ public class FlowManager : MonoBehaviour
     public enum AppState
     {
         Idle,
-        TrailHeightSetup,
         WaypointSetup,
         Intro,
         Collection,

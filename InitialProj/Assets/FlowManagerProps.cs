@@ -14,7 +14,7 @@ public class FlowManagerProps : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(!GameObject.Find("Waypoints").GetComponent<FlowManager>().SetupMode)
+        if(GameObject.Find("Waypoints").GetComponent<FlowManager>().CurrentAppState != FlowManager.AppState.WaypointSetup)
             meshR.enabled = IsCurrentWayPoint;
         if (ReachedCurrentWayPoint)
             gameObject.transform.Rotate(0.0f, 0.0f, 1.0f);
