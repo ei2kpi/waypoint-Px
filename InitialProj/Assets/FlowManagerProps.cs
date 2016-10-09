@@ -5,7 +5,7 @@ public class FlowManagerProps : MonoBehaviour {
     
     public bool ReachedCurrentWayPoint;
     private MeshRenderer[] meshR;
-    //private Renderer meshBottleR;
+    private MeshRenderer meshBottleR;
     public Texture2D fire;
     public Texture2D blue;
     private TextMesh meshText;
@@ -17,8 +17,8 @@ public class FlowManagerProps : MonoBehaviour {
         meshR = gameObject.GetComponentsInChildren<MeshRenderer>();
         meshText = gameObject.GetComponentInChildren<TextMesh>();
         
-        //meshBottleR = gameObject.GetComponentInChildren<Renderer>();
-        //meshBottleR.material.mainTexture = blue;
+        meshBottleR = gameObject.GetComponentInChildren<MeshRenderer>();
+        meshBottleR.material.SetTexture("_FireTex", fire);
     }
 	
 	// Update is called once per frame
@@ -46,12 +46,10 @@ public class FlowManagerProps : MonoBehaviour {
                     }
                     break;
                 case (FlowManager.WaypointState.FinishedWithWaypoint):
-                    // todo figure out how to change texture
-                    //meshBottleR.material.mainTexture = blue;
+                    meshBottleR.material.SetTexture("_FireTex", blue);
                     meshText.text = "Move on to the next Rx";
                     break;
                 case (FlowManager.WaypointState.CloseToWaypoint):
-                    // todo: this event isn't triggering
                     meshText.text = "Tap when complete. Collect 3 Adderall";
                     break;
                 default:
