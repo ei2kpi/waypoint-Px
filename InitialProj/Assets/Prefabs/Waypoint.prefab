@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011888847860
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,12 +209,12 @@ TextMesh:
   m_GameObject: {fileID: 1000014069751764}
   m_Text: hi there
   m_OffsetZ: 0
-  m_CharacterSize: 1
+  m_CharacterSize: 0.02
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 10
+  m_FontSize: 40
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 0}
