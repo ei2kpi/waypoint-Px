@@ -47,6 +47,8 @@ public class FlowManager : MonoBehaviour
         {
             case AppState.Idle:
                 // Reset State of the app to Idle
+                SetIntro(false);
+                SetOutro(false);
                 break;
             case AppState.WaypointSetup:
                 // Go to Waypoint Setup State
@@ -79,8 +81,6 @@ public class FlowManager : MonoBehaviour
             if (cursorWayPoint != null)
                 cursorWayPoint.transform.position = Vector3.Lerp(cursorWayPoint.transform.position, ProposeTransformPosition(), 0.2f);
         }
-
-
     }
 
     private void CheckIfUserIsNearWaypoint()
@@ -101,11 +101,14 @@ public class FlowManager : MonoBehaviour
 
     private void SwitchToFinishMode()
     {
-        throw new NotImplementedException();
+        SetIntro(false);
+        SetOutro(true);
     }
 
     private void SwitchToCollectionMode()
     {
+        SetIntro(false);
+        SetOutro(false);
         // Reset normal cursor instead of waypoint
         if (cursorWayPoint != null)
             DestroyObject(cursorWayPoint);
@@ -122,8 +125,26 @@ public class FlowManager : MonoBehaviour
         CurrentAppState = AppState.Intro;
     }
 
+    private void SetOutro (bool enabled)
+    {
+        foreach (Transform child in GameObject.Find("OutroParent").transform)
+        {
+            child.gameObject.SetActive(enabled);
+        }
+    }
+
+    private void SetIntro(bool enabled)
+    {
+        foreach (Transform child in GameObject.Find("IntroParent").transform)
+        {
+            child.gameObject.SetActive(enabled);
+        }
+    }
+
     private void SwitchToWayPointSetup()
     {
+        SetIntro(false);
+        SetOutro(false);
         ClearAllWaypoints();
 
 		// Create Waypoint on cursor
@@ -140,6 +161,8 @@ public class FlowManager : MonoBehaviour
 
     private void SwitchToIntro()
     {
+        SetIntro(true);
+        SetOutro(false);
     }
 
     private void GetAllWaypoints()
