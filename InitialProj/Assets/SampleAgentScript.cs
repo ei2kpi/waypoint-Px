@@ -21,7 +21,7 @@ public class SampleAgentScript : MonoBehaviour
 
         for (int index = 0; index < waypoints.Length; index++)
         {
-            if (waypoints[index].GetComponent<FlowManagerProps>().IsCurrentWayPoint)
+            if (waypoints[index].GetComponent<FlowManagerProps>().CurrWayPointState == FlowManager.WaypointState.GoToWaypoint)
             {
                 agent.SetDestination(waypoints[index].transform.position);
             }

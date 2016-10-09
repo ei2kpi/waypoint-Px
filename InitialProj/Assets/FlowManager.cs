@@ -25,6 +25,7 @@ public class FlowManager : MonoBehaviour
     public float waypointThreshold;
     public float distToWaypoint;
 
+    public Transform PrevWayPoint;
     public Transform CurrentWayPoint;
     public bool GoToNextWayPointBtn;
     public bool WrapWayPoints = false;
@@ -70,13 +71,31 @@ public class FlowManager : MonoBehaviour
     {
         CheckForKeybdInput();
 
+        CheckIfUserIsNearWaypoint();
+
+        // Constantly update Waypoint position to Cursor position to attach Waypoint to Cursor
         if (CurrentAppState == AppState.WaypointSetup)
         {
             if (cursorWayPoint != null)
-            {
-                // Constantly update Waypoint position to Cursor position to attach Waypoint to Cursor
                 cursorWayPoint.transform.position = Vector3.Lerp(cursorWayPoint.transform.position, ProposeTransformPosition(), 0.2f);
-            }
+        }
+
+
+    }
+
+    private void CheckIfUserIsNearWaypoint()
+    {
+        if (CurrentWayPoint != null)
+        {
+            distToWaypoint = Vector3.Distance(Camera.main.transform.position, CurrentWayPoint.transform.position);
+
+            bool UserIsNear = distToWaypoint <= waypointThreshold;
+            // If distance is less than threshold, CloseToWaypoint otherwise, GoToWaypoint
+            CurrentWayPoint.GetComponent<FlowManagerProps>().CurrWayPointState =  UserIsNear ? WaypointState.CloseToWaypoint : WaypointState.GoToWaypoint;
+
+            // Disable previous waypoint when you get close to the Current waypoint.
+            if (PrevWayPoint!= null && UserIsNear && PrevWayPoint.GetComponent<FlowManagerProps>().CurrWayPointState != WaypointState.Invisible)
+                PrevWayPoint.GetComponent<FlowManagerProps>().CurrWayPointState = WaypointState.Invisible;
         }
     }
 
@@ -123,25 +142,6 @@ public class FlowManager : MonoBehaviour
     {
     }
 
-    private void CheckIfReachedWayPoint()
-    {
-        if (CurrentWayPoint == null)
-            return;
-
-        distToWaypoint = Vector3.Distance(Camera.main.transform.position, CurrentWayPoint.position);
-
-        if (distToWaypoint <= waypointThreshold)
-        {
-            ReachedCurrentWayPoint = true;
-            CurrentWayPoint.GetComponent<FlowManagerProps>().ReachedCurrentWayPoint = true;
-        }
-        else
-        {
-            ReachedCurrentWayPoint = false;
-            CurrentWayPoint.GetComponent<FlowManagerProps>().ReachedCurrentWayPoint = false;
-        }
-    }
-
     private void GetAllWaypoints()
     {
         wayPointList.Clear();
@@ -153,7 +153,7 @@ public class FlowManager : MonoBehaviour
                 trans.gameObject.layer = 0;
         }
         CurrentWayPoint = wayPointList[0];
-        CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = true;
+        CurrentWayPoint.GetComponent<FlowManagerProps>().CurrWayPointState = WaypointState.GoToWaypoint;
         Debug.logger.Log("Enumerating all waypoints");
 
 		if (drugs[0].productCard != null)
@@ -172,6 +172,7 @@ public class FlowManager : MonoBehaviour
             }
             wayPointList.Clear();
             CurrentWayPoint = null;
+            PrevWayPoint = null;
             Debug.logger.Log("Clearing all waypoints");
         }
 
@@ -180,13 +181,16 @@ public class FlowManager : MonoBehaviour
         if(store != null)
             store.Clear();
     }
+
     public void GoToNextWayPoint()
     {
         if (CurrentWayPoint != null)
         {
+            // Set previous waypoint to Current Waypoint
+            PrevWayPoint = CurrentWayPoint;
             // Set current waypoint to not current any more
-            CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = false;
-
+            CurrentWayPoint.GetComponent<FlowManagerProps>().CurrWayPointState = WaypointState.FinishedWithWaypoint;
+            
 			int nextWaypointIndex = wayPointList.IndexOf(CurrentWayPoint) + 1;
 
 			// Switch to next waypoint, if WrapMode is on, then wrap back to 0
@@ -195,7 +199,7 @@ public class FlowManager : MonoBehaviour
             else if (WrapWayPoints)
                 CurrentWayPoint = wayPointList[0];
 
-            CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = true;
+            CurrentWayPoint.GetComponent<FlowManagerProps>().CurrWayPointState = WaypointState.GoToWaypoint;
 			
 			if (productCard != null)
 			{
@@ -283,9 +287,10 @@ public class FlowManager : MonoBehaviour
 
     public enum WaypointState
     {
-        Idle,
+        Invisible,
         GoToWaypoint,
-        CollectingWaypoint
+        CloseToWaypoint,
+        FinishedWithWaypoint
     }
 
     public enum AppState

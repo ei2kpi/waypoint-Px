@@ -16,7 +16,7 @@ public class NavMarkerManager : MonoBehaviour {
     void OnSelect()
     {
         GameObject.Find("HeadAudioSource").GetComponent<AudioSource>().Play();
-        if (GameObject.Find("Waypoints").GetComponent<FlowManager>().CurrentAppState != FlowManager.AppState.WaypointSetup && this.transform.parent.GetComponent<FlowManagerProps>().IsCurrentWayPoint)
+        if (GameObject.Find("Waypoints").GetComponent<FlowManager>().CurrentAppState != FlowManager.AppState.WaypointSetup && this.transform.parent.GetComponent<FlowManagerProps>().CurrWayPointState == FlowManager.WaypointState.CloseToWaypoint)
         {
             GameObject.Find("Waypoints").GetComponent<FlowManager>().GoToNextWayPoint();
         }
