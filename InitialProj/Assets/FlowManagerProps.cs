@@ -8,12 +8,15 @@ public class FlowManagerProps : MonoBehaviour {
     //private Renderer meshBottleR;
     public Texture2D fire;
     public Texture2D blue;
+    private TextMesh meshText;
 
     public FlowManager.WaypointState CurrWayPointState = FlowManager.WaypointState.Invisible;
 
 	// Use this for initialization
 	void Start () {
         meshR = gameObject.GetComponentsInChildren<MeshRenderer>();
+        meshText = gameObject.GetComponentInChildren<TextMesh>();
+        
         //meshBottleR = gameObject.GetComponentInChildren<Renderer>();
         //meshBottleR.material.mainTexture = blue;
     }
@@ -36,6 +39,7 @@ public class FlowManagerProps : MonoBehaviour {
                     }
                     break;
                 case (FlowManager.WaypointState.GoToWaypoint):
+                    meshText.text = "Collect 3 Adderall";
                     foreach (MeshRenderer mr in meshR)
                     {
                         mr.enabled = true;
@@ -44,8 +48,11 @@ public class FlowManagerProps : MonoBehaviour {
                 case (FlowManager.WaypointState.FinishedWithWaypoint):
                     // todo figure out how to change texture
                     //meshBottleR.material.mainTexture = blue;
+                    meshText.text = "Move on to the next Rx";
                     break;
                 case (FlowManager.WaypointState.CloseToWaypoint):
+                    // todo: this event isn't triggering
+                    meshText.text = "Tap when complete. Collect 3 Adderall";
                     break;
                 default:
                     break;
