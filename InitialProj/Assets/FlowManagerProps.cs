@@ -7,9 +7,6 @@ public class FlowManagerProps : MonoBehaviour {
     public bool ReachedCurrentWayPoint;
     private MeshRenderer meshR;
 
-	[HideInInspector]
-	public DrugData drugData;
-
 	// Use this for initialization
 	void Start () {
         meshR = gameObject.GetComponentInChildren<MeshRenderer>();

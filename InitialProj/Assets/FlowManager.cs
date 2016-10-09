@@ -10,16 +10,13 @@ using HoloToolkit.Unity;
 public class DrugData
 {
 	public string name;
-	public int dosage;
+	public GameObject productCard;
 
 }
 
 public class FlowManager : MonoBehaviour
 { 
 	public DrugData[] drugs = new DrugData[10];
-
-	// this index will track which waypoint we are placing and assign the matching drugData
-	private int waypointIndex = 0;
 
 	public List<Transform> wayPointList;
 
@@ -34,7 +31,8 @@ public class FlowManager : MonoBehaviour
     private GameObject cursorWayPoint;
     public GameObject WaypointPrefab;
     public GameObject WaypointCursorPrefab;
-    public bool SetupMode = false;
+	private GameObject productCard;
+	public bool SetupMode = false;
 
 	
 
@@ -68,8 +66,6 @@ public class FlowManager : MonoBehaviour
     private void EnterSetupMode()
     {
         ClearAllWaypoints();
-
-		waypointIndex = 0;
 
 		// Create Waypoint on cursor
 		cursorWayPoint = (GameObject)Instantiate(WaypointCursorPrefab, ProposeTransformPosition(), Quaternion.identity);
@@ -132,7 +128,13 @@ public class FlowManager : MonoBehaviour
         CurrentWayPoint = wayPointList[0];
         CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = true;
         Debug.logger.Log("Enumerating all waypoints");
-    }
+
+		if (drugs[0].productCard != null)
+		{
+			productCard = (GameObject)Instantiate(drugs[0].productCard, CurrentWayPoint.transform.position, Quaternion.identity);
+		}
+
+	}
 
     private void ClearAllWaypoints()
     {
@@ -154,14 +156,22 @@ public class FlowManager : MonoBehaviour
             // Set current waypoint to not current any more
             CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = false;
 
-            // Switch to next waypoint, if WrapMode is on, then wrap back to 0
-            if (wayPointList.IndexOf(CurrentWayPoint) < wayPointList.Count - 1)
-                CurrentWayPoint = wayPointList[wayPointList.IndexOf(CurrentWayPoint) + 1];
+			int nextWaypointIndex = wayPointList.IndexOf(CurrentWayPoint) + 1;
+			// Switch to next waypoint, if WrapMode is on, then wrap back to 0
+			if (wayPointList.IndexOf(CurrentWayPoint) < wayPointList.Count - 1)
+                CurrentWayPoint = wayPointList[nextWaypointIndex];
             else if (WrapWayPoints)
                 CurrentWayPoint = wayPointList[0];
 
             CurrentWayPoint.GetComponent<FlowManagerProps>().IsCurrentWayPoint = true;
-        }
+			
+			if (productCard != null)
+			{
+				Destroy(productCard);
+			}
+
+			productCard = (GameObject)Instantiate(drugs[nextWaypointIndex].productCard, CurrentWayPoint.transform.position, Quaternion.identity);
+		}
     }
 
     private void  CheckForKeybdInput()
@@ -191,15 +201,6 @@ public class FlowManager : MonoBehaviour
             GameObject newWaypoint = (GameObject)Instantiate(WaypointPrefab, cursorWayPoint.transform.position, Quaternion.identity);
             newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
             WorldAnchorManager.Instance.AttachAnchor(newWaypoint, newWaypoint.GetInstanceID().ToString());
-
-			// add the drugData to the placed waypoint
-			FlowManagerProps props = gameObject.GetComponent(typeof(FlowManagerProps)) as FlowManagerProps;
-
-			if (props != null)
-			{
-				props.drugData = drugs[waypointIndex];
-				waypointIndex++;
-			}
 		}
         else if (Input.GetKeyDown(KeyCode.L))
         {
