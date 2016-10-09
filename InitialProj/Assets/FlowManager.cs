@@ -34,8 +34,8 @@ public class FlowManager : MonoBehaviour
 	private GameObject productCard;
 	public bool SetupMode = false;
 
-	
-
+    public AppState CurrentAppState = AppState.Idle;
+    
     void Start () {
 	
 	}
@@ -240,5 +240,22 @@ public class FlowManager : MonoBehaviour
         Vector3 retval = GameObject.Find("CursorWithFeedback").transform.position;
 
         return retval;
+    }
+
+    public enum WaypointState
+    {
+        Idle,
+        GoToWaypoint,
+        CollectingWaypoint
+    }
+
+    public enum AppState
+    {
+        Idle,
+        TrailHeightSetup,
+        WaypointSetup,
+        Intro,
+        Collection,
+        Finish
     }
 }
