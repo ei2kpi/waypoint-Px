@@ -51,6 +51,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6594d6b94be96214a90ef227e2bb0738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drugs:
+  - name: OxyContin
+    productCard: {fileID: 1000012963281772, guid: a55bc4077bbd0bd4197f94b2f83567b3,
+      type: 2}
+  - name: Amoxicillin
+    productCard: {fileID: 1000012963281772, guid: a55bc4077bbd0bd4197f94b2f83567b3,
+      type: 2}
+  - name: 
+    productCard: {fileID: 0}
+  - name: 
+    productCard: {fileID: 0}
+  - name: 
+    productCard: {fileID: 0}
+  - name: 
+    productCard: {fileID: 0}
+  - name: 
+    productCard: {fileID: 0}
+  - name: 
+    productCard: {fileID: 0}
+  - name: 
+    productCard: {fileID: 0}
+  - name: 
+    productCard: {fileID: 0}
   wayPointList: []
   waypointThreshold: 1.5
   distToWaypoint: 0
