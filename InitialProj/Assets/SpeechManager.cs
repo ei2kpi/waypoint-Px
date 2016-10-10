@@ -13,6 +13,16 @@ public class SpeechManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        keywords.Add("Happy easter", () =>
+        {
+            GameObject.Find("HappyEaster").GetComponent<AudioSource>().Play();
+        });
+
+        keywords.Add("Merry Christmas", () =>
+        {
+            GameObject.Find("HappyEaster").GetComponent<AudioSource>().Stop();
+        });
+
         keywords.Add("Action one", () =>
         {
             // Call the OnReset method on every descendant object.

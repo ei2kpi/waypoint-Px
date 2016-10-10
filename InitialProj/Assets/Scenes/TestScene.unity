@@ -393,6 +393,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 279b534ea3a46b244914a9e0d40e8a4d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &399057626 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000013488365534, guid: e65869270905f354d95932dc9f21d578,
+    type: 2}
+  m_PrefabInternal: {fileID: 382324254}
+--- !u!114 &399057633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 399057626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eac2c8057c83b74e9eeed26f2e346c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaypointPrefab: {fileID: 1000011107313634, guid: 0d6711c6a7f048b47a31b90ff8b61833,
+    type: 2}
 --- !u!4 &400143094 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010703163086, guid: 279b534ea3a46b244914a9e0d40e8a4d,
@@ -460,6 +478,10 @@ Transform:
   - {fileID: 495166760}
   m_Father: {fileID: 1581865256}
   m_RootOrder: 3
+--- !u!4 &485613046 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 402774, guid: b84b73491ac53a34095000876132a211, type: 2}
+  m_PrefabInternal: {fileID: 1266818518}
 --- !u!1 &495166759
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +661,109 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1581865256}
   m_RootOrder: 5
+--- !u!1 &976167620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 976167621}
+  - 82: {fileID: 976167622}
+  m_Layer: 0
+  m_Name: HappyEaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976167621
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976167620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 485613046}
+  m_RootOrder: 2
+--- !u!82 &976167622
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976167620}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 16e05eaf7f5c37d4fa4619dab80b774f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &1050841071
 Prefab:
   m_ObjectHideFlags: 0
@@ -866,7 +991,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000014254445638, guid: b84b73491ac53a34095000876132a211, type: 2}
+    - {fileID: 114000011017749334, guid: b84b73491ac53a34095000876132a211, type: 2}
+    - {fileID: 114000011297113236, guid: b84b73491ac53a34095000876132a211, type: 2}
+    - {fileID: 114000010785548792, guid: b84b73491ac53a34095000876132a211, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b84b73491ac53a34095000876132a211, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1323137202 stripped
