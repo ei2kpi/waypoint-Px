@@ -77,7 +77,7 @@ MonoBehaviour:
   - name: 
     productCard: {fileID: 0}
   wayPointList: []
-  waypointThreshold: 2
+  waypointThreshold: 1.75
   distToWaypoint: 0
   PrevWayPoint: {fileID: 0}
   CurrentWayPoint: {fileID: 0}

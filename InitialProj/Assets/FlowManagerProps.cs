@@ -65,7 +65,7 @@ public class FlowManagerProps : MonoBehaviour {
                     }
                     break;
                 case (FlowManager.WaypointState.GoToWaypoint):
-                    meshText.text = string.Format("Collect {0}", pill_count);
+                    meshText.text = string.Format("Collect {0} pills", pill_count);
                     foreach (MeshRenderer mr in meshR)
                     {
                         mr.enabled = true;
@@ -78,7 +78,7 @@ public class FlowManagerProps : MonoBehaviour {
                     break;
                 case (FlowManager.WaypointState.CloseToWaypoint):
                     meshBottleR.material.SetTexture("_FireTex", fire);
-                    meshText.text = string.Format("Tap when complete. Collect {0}", pill_count);
+                    meshText.text = string.Format("Tap or say 'Next' when complete \n Collect {0} pills", pill_count);
                     break;
                 default:
                     break;

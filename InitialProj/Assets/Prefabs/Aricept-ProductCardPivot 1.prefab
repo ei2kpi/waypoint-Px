@@ -22,6 +22,7 @@ GameObject:
   - 33: {fileID: 33000012207052344}
   - 64: {fileID: 64000011294608172}
   - 23: {fileID: 23000011410502906}
+  - 114: {fileID: 114000012977565866}
   m_Layer: 0
   m_Name: ProductCard
   m_TagString: Untagged
@@ -41,6 +42,7 @@ GameObject:
   - 135: {fileID: 135000013581891066}
   - 23: {fileID: 23000014105104016}
   - 95: {fileID: 95000011309701494}
+  - 114: {fileID: 114000010588049288}
   m_Layer: 0
   m_Name: BlueM&M
   m_TagString: Untagged
@@ -206,6 +208,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010588049288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012828616782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901c7b22393c98840bafa4fad1eb9b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000011009518928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,6 +231,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotAxis: 0
+--- !u!114 &114000012977565866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011599020222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901c7b22393c98840bafa4fad1eb9b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135000013581891066
 SphereCollider:
   m_ObjectHideFlags: 1

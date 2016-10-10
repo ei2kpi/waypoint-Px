@@ -147,7 +147,7 @@ public class FlowManager : MonoBehaviour
         ClearAllWaypoints();
 
         //Turn On table renderer
-        GameObject.Find("TableObstacle").GetComponent<MeshRenderer>().enabled = true;
+        //GameObject.Find("TableObstacle").GetComponent<MeshRenderer>().enabled = true;
 
         // Create Waypoint on cursor
         cursorWayPoint = (GameObject)Instantiate(WaypointCursorPrefab, ProposeTransformPosition(), Quaternion.identity);
@@ -166,7 +166,7 @@ public class FlowManager : MonoBehaviour
         SetIntro(true);
         SetOutro(false);
         // Disable Table Renderer
-        GameObject.Find("TableObstacle").GetComponent<MeshRenderer>().enabled = false;
+        // GameObject.Find("TableObstacle").GetComponent<MeshRenderer>().enabled = false;
 
         // Reset normal cursor instead of waypoint
         if (cursorWayPoint != null)

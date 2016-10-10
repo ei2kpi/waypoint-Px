@@ -22,6 +22,7 @@ GameObject:
   - 33: {fileID: 33000012207052344}
   - 64: {fileID: 64000011294608172}
   - 23: {fileID: 23000011410502906}
+  - 114: {fileID: 114000012770078590}
   m_Layer: 0
   m_Name: ProductCard
   m_TagString: Untagged
@@ -57,6 +58,7 @@ GameObject:
   - 135: {fileID: 135000011509539956}
   - 23: {fileID: 23000010010336130}
   - 95: {fileID: 95000014195548446}
+  - 114: {fileID: 114000014252403960}
   m_Layer: 0
   m_Name: M&M (2)
   m_TagString: Untagged
@@ -218,6 +220,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotAxis: 0
+--- !u!114 &114000012770078590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011599020222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901c7b22393c98840bafa4fad1eb9b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114000014252403960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013206383032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901c7b22393c98840bafa4fad1eb9b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135000011509539956
 SphereCollider:
   m_ObjectHideFlags: 1
