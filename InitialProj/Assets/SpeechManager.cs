@@ -2,11 +2,13 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
+using UnityEngine.VR.WSA.Persistence;
+using HoloToolkit.Unity;
 
-public class SpeechManager : MonoBehaviour
-{
+public class SpeechManager : MonoBehaviour { 
     KeywordRecognizer keywordRecognizer = null;
     Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
+    public GameObject WaypointPrefab;
 
     // Use this for initialization
     void Start()
@@ -14,31 +16,42 @@ public class SpeechManager : MonoBehaviour
         keywords.Add("Action one", () =>
         {
             // Call the OnReset method on every descendant object.
-            InputBroker.SetKeyDown(KeyCode.Alpha1);
+            GameObject.Find("Waypoints").GetComponent<FlowManager>().CurrentAppState = FlowManager.AppState.WaypointSetup;
+            GameObject.Find("Waypoints").GetComponent<FlowManager>().AppStateChanged();
         });
 
         keywords.Add("Action two", () =>
         {
             // Call the OnReset method on every descendant object.
-            InputBroker.SetKeyDown(KeyCode.Alpha2);
+            GameObject.Find("Waypoints").GetComponent<FlowManager>().CurrentAppState = FlowManager.AppState.Intro;
+            GameObject.Find("Waypoints").GetComponent<FlowManager>().AppStateChanged();
         });
 
         keywords.Add("Action three", () =>
         {
             // Call the OnReset method on every descendant object.
-            InputBroker.SetKeyDown(KeyCode.Alpha3);
+            GameObject.Find("Waypoints").GetComponent<FlowManager>().CurrentAppState = FlowManager.AppState.Collection;
+            GameObject.Find("Waypoints").GetComponent<FlowManager>().AppStateChanged();
         });
 
-        keywords.Add("Action four", () =>
+        keywords.Add("Action place", () =>
         {
-            // Call the OnReset method on every descendant object.
-            InputBroker.SetKeyDown(KeyCode.Alpha4);
+            Debug.Log(GestureManager.Instance.FocusedObject);
+            if (GestureManager.Instance.FocusedObject != null)
+            {
+                GameObject newWaypoint = (GameObject)Instantiate(WaypointPrefab, GameObject.Find("Waypoints").GetComponent<FlowManager>().cursorWayPoint.transform.position, Quaternion.identity);
+                newWaypoint.transform.SetParent(GameObject.Find("Waypoints").transform);
+                WorldAnchorManager.Instance.AttachAnchor(newWaypoint, newWaypoint.GetInstanceID().ToString());
+            }
         });
 
         keywords.Add("Next", () =>
         {
             // Call the OnReset method on every descendant object.
-            this.SendMessage("OnSelect");
+            if (GestureManager.Instance.FocusedObject != null)
+            {
+                GestureManager.Instance.FocusedObject.SendMessage("OnSelect", SendMessageOptions.DontRequireReceiver);
+            }
         });
 
         // Tell the KeywordRecognizer about our keywords.

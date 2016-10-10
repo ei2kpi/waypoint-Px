@@ -30,7 +30,7 @@ public class FlowManager : MonoBehaviour
     public bool WrapWayPoints = false;
     public bool ReachedCurrentWayPoint = false;
     
-    private GameObject cursorWayPoint;
+    public GameObject cursorWayPoint;
     public GameObject WaypointPrefab;
     public GameObject WaypointCursorPrefab;
 	private GameObject productCard;
